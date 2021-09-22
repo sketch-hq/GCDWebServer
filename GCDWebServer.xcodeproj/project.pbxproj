@@ -1262,6 +1262,7 @@
 					"-Wno-cast-qual",
 					"-Wno-nullable-to-nonnull-conversion",
 					"-Wno-partial-availability",
+					"$(WARNING_CFLAGS_SKETCH)",
 				);
 			};
 			name = Debug;
@@ -1302,7 +1303,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.pol-online.GCDWebServers";
-				WARNING_CFLAGS = "-Wall";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"$(WARNING_CFLAGS_SKETCH)",
+				);
 			};
 			name = Release;
 		};
@@ -1321,54 +1325,8 @@
 				PRODUCT_NAME = GCDWebServers;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				"WARNING_CFLAGS[sdk=macosx11.3]" = (
-					"-Wall",
-					"-Weverything",
-					"-Wshadow",
-					"-Wshorten-64-to-32",
-					"-Wno-vla",
-					"-Wno-explicit-ownership-type",
-					"-Wno-gnu-statement-expression",
-					"-Wno-direct-ivar-access",
-					"-Wno-implicit-retain-self",
-					"-Wno-assign-enum",
-					"-Wno-format-nonliteral",
-					"-Wno-cast-align",
-					"-Wno-padded",
-					"-Wno-documentation",
-					"-Wno-documentation-unknown-command",
-					"-Wno-objc-missing-property-synthesis",
-					"-Wno-cstring-format-directive",
-					"-Wno-reserved-id-macro",
-					"-Wno-cast-qual",
-					"-Wno-nullable-to-nonnull-conversion",
-					"-Wno-partial-availability",
-					"-Wno-completion-handler",
-				);
-				"WARNING_CFLAGS[sdk=macosx12.0]" = (
-					"-Wall",
-					"-Weverything",
-					"-Wshadow",
-					"-Wshorten-64-to-32",
-					"-Wno-vla",
-					"-Wno-explicit-ownership-type",
-					"-Wno-gnu-statement-expression",
-					"-Wno-direct-ivar-access",
-					"-Wno-implicit-retain-self",
-					"-Wno-assign-enum",
-					"-Wno-format-nonliteral",
-					"-Wno-cast-align",
-					"-Wno-padded",
-					"-Wno-documentation",
-					"-Wno-documentation-unknown-command",
-					"-Wno-objc-missing-property-synthesis",
-					"-Wno-cstring-format-directive",
-					"-Wno-reserved-id-macro",
-					"-Wno-cast-qual",
-					"-Wno-nullable-to-nonnull-conversion",
-					"-Wno-partial-availability",
-					"-Wno-completion-handler",
-				);
+				WARNING_CFLAGS_SKETCH = "$(XCODE_$(XCODE_VERSION_ACTUAL))";
+				XCODE_1300 = "-Wno-completion-handler";
 			};
 			name = Debug;
 		};
@@ -1387,14 +1345,8 @@
 				PRODUCT_NAME = GCDWebServers;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				"WARNING_CFLAGS[sdk=macosx11.3]" = (
-					"-Wall",
-					"-Wno-completion-handler",
-				);
-				"WARNING_CFLAGS[sdk=macosx12.0]" = (
-					"-Wall",
-					"-Wno-completion-handler",
-				);
+				WARNING_CFLAGS_SKETCH = "$(XCODE_$(XCODE_VERSION_ACTUAL))";
+				XCODE_1300 = "-Wno-completion-handler";
 			};
 			name = Release;
 		};
