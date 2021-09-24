@@ -856,7 +856,7 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					CEE28CD01AE004D800F4023C = {
 						CreatedOnToolsVersion = 6.3;
@@ -1262,6 +1262,7 @@
 					"-Wno-cast-qual",
 					"-Wno-nullable-to-nonnull-conversion",
 					"-Wno-partial-availability",
+					"$(WARNING_CFLAGS_SKETCH)",
 				);
 			};
 			name = Debug;
@@ -1302,7 +1303,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.pol-online.GCDWebServers";
-				WARNING_CFLAGS = "-Wall";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"$(WARNING_CFLAGS_SKETCH)",
+				);
 			};
 			name = Release;
 		};
@@ -1321,6 +1325,8 @@
 				PRODUCT_NAME = GCDWebServers;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				WARNING_CFLAGS_SKETCH = "$(XCODE_$(XCODE_VERSION_ACTUAL))";
+				XCODE_1300 = "-Wno-completion-handler";
 			};
 			name = Debug;
 		};
@@ -1339,6 +1345,8 @@
 				PRODUCT_NAME = GCDWebServers;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				WARNING_CFLAGS_SKETCH = "$(XCODE_$(XCODE_VERSION_ACTUAL))";
+				XCODE_1300 = "-Wno-completion-handler";
 			};
 			name = Release;
 		};
