@@ -1327,6 +1327,7 @@
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS_SKETCH = "$(XCODE_$(XCODE_VERSION_ACTUAL))";
 				XCODE_1300 = "-Wno-completion-handler";
+				XCODE_1310 = "-Wno-completion-handler";
 			};
 			name = Debug;
 		};
@@ -1347,6 +1348,7 @@
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS_SKETCH = "$(XCODE_$(XCODE_VERSION_ACTUAL))";
 				XCODE_1300 = "-Wno-completion-handler";
+				XCODE_1310 = "-Wno-completion-handler";
 			};
 			name = Release;
 		};
