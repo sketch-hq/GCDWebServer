@@ -856,7 +856,7 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					CEE28CD01AE004D800F4023C = {
 						CreatedOnToolsVersion = 6.3;
@@ -1327,6 +1327,7 @@
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS_SKETCH = "$(XCODE_$(XCODE_VERSION_ACTUAL))";
 				XCODE_1300 = "-Wno-completion-handler";
+				XCODE_1310 = "-Wno-completion-handler";
 			};
 			name = Debug;
 		};
@@ -1347,6 +1348,7 @@
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS_SKETCH = "$(XCODE_$(XCODE_VERSION_ACTUAL))";
 				XCODE_1300 = "-Wno-completion-handler";
+				XCODE_1310 = "-Wno-completion-handler";
 			};
 			name = Release;
 		};
