@@ -1329,6 +1329,8 @@
 				XCODE_1300 = "-Wno-completion-handler";
 				XCODE_1310 = "-Wno-completion-handler";
 				XCODE_1320 = "-Wno-completion-handler";
+				XCODE_1330 = "-Wno-completion-handler";
+				XCODE_1340 = "-Wno-completion-handler";
 			};
 			name = Debug;
 		};
@@ -1351,6 +1353,8 @@
 				XCODE_1300 = "-Wno-completion-handler";
 				XCODE_1310 = "-Wno-completion-handler";
 				XCODE_1320 = "-Wno-completion-handler";
+				XCODE_1330 = "-Wno-completion-handler";
+				XCODE_1340 = "-Wno-completion-handler";
 			};
 			name = Release;
 		};
