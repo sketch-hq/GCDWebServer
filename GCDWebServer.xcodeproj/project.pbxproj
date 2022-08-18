@@ -856,7 +856,7 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					CEE28CD01AE004D800F4023C = {
 						CreatedOnToolsVersion = 6.3;
@@ -1258,6 +1258,7 @@
 					"-Wno-documentation-unknown-command",
 					"-Wno-objc-missing-property-synthesis",
 					"-Wno-cstring-format-directive",
+					"-Wno-completion-handler",
 					"-Wno-reserved-id-macro",
 					"-Wno-cast-qual",
 					"-Wno-nullable-to-nonnull-conversion",
