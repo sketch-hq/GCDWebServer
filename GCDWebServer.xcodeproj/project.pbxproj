@@ -1266,6 +1266,7 @@
 					"-Wno-nullable-to-nonnull-conversion",
 					"-Wno-partial-availability",
 					"$(WARNING_CFLAGS_SKETCH)",
+					"-Wno-declaration-after-statement",
 				);
 			};
 			name = Debug;
@@ -1311,6 +1312,7 @@
 				WARNING_CFLAGS = (
 					"-Wall",
 					"$(WARNING_CFLAGS_SKETCH)",
+					"-Wno-declaration-after-statement",
 				);
 			};
 			name = Release;
