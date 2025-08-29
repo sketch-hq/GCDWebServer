@@ -1242,6 +1242,7 @@
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-Wno-reserved-identifier";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.pol-online.GCDWebServers";
 				WARNING_CFLAGS = (
 					"-Wall",
@@ -1310,6 +1311,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				OTHER_CFLAGS = "-Wno-reserved-identifier";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.pol-online.GCDWebServers";
 				WARNING_CFLAGS = (
 					"-Wall",
