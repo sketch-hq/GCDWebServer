@@ -801,10 +801,12 @@ static inline BOOL _CompareResources(NSString* responseETag, NSString* requestET
 - (void)abortRequest:(GCDWebServerRequest*)request withStatusCode:(NSInteger)statusCode {
   GWS_DCHECK(_responseMessage == NULL);
   GWS_DCHECK((statusCode >= 400) && (statusCode < 600));
-  [self _initializeResponseHeadersWithStatusCode:statusCode];
-  [self _writeHeadersWithCompletionBlock:^(BOOL success) {
-    ;  // Nothing more to do
-  }];
+  if (request) {
+    [self _initializeResponseHeadersWithStatusCode:statusCode];
+    [self _writeHeadersWithCompletionBlock:^(BOOL success) {
+      ;  // Nothing more to do
+    }];
+  }
   GWS_LOG_DEBUG(@"Connection aborted with status code %i on socket %i", (int)statusCode, _socket);
 }
 
