@@ -398,10 +398,10 @@ static inline xmlNodePtr _XMLChildWithName(xmlNodePtr child, const xmlChar* name
     return [GCDWebServerErrorResponse responseWithClientError:kGCDWebServerHTTPStatusCode_BadRequest message:@"Unsupported 'Depth' header: %@", depthHeader];  // TODO: Return 403 / propfind-finite-depth for "infinity" depth
   }
   
-  DAVProperties properties = 0;
+  DAVProperties properties = (DAVProperties)0;
   if (request.data.length) {
     BOOL success = YES;
-    xmlDocPtr document = xmlReadMemory(request.data.bytes, (int)request.data.length, NULL, NULL, kXMLParseOptions);
+    xmlDocPtr document = xmlReadMemory((const char *)request.data.bytes, (int)request.data.length, NULL, NULL, kXMLParseOptions);
     if (document) {
       xmlNodePtr rootNode = _XMLChildWithName(document->children, (const xmlChar*)"propfind");
       xmlNodePtr allNode = rootNode ? _XMLChildWithName(rootNode->children, (const xmlChar*)"allprop") : NULL;
@@ -503,7 +503,7 @@ static inline xmlNodePtr _XMLChildWithName(xmlNodePtr child, const xmlChar* name
   NSString* owner = nil;
   NSString* token = nil;
   BOOL success = YES;
-  xmlDocPtr document = xmlReadMemory(request.data.bytes, (int)request.data.length, NULL, NULL, kXMLParseOptions);
+  xmlDocPtr document = xmlReadMemory((const char *)request.data.bytes, (int)request.data.length, NULL, NULL, kXMLParseOptions);
   if (document) {
     xmlNodePtr node = _XMLChildWithName(document->children, (const xmlChar*)"lockinfo");
     if (node) {

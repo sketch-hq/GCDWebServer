@@ -25,7 +25,7 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "GCDWebServerResponse.h"
+#import <GCDWebServers/GCDWebServerResponse.h>
 
 /**
  *  The GCDWebServerFileResponse subclass of GCDWebServerResponse reads the body

@@ -122,7 +122,10 @@
 - (instancetype)initWithHTMLTemplate:(NSString*)path variables:(NSDictionary*)variables {
   NSMutableString* html = [[NSMutableString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
   [variables enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSString* value, BOOL* stop) {
-    [html replaceOccurrencesOfString:[NSString stringWithFormat:@"%%%@%%", key] withString:value options:0 range:NSMakeRange(0, html.length)];
+    [html replaceOccurrencesOfString:[NSString stringWithFormat:@"%%%@%%", key]
+                          withString:value
+                             options:(NSStringCompareOptions)0
+                               range:NSMakeRange(0, html.length)];
   }];
   id response = [self initWithHTML:html];
   return response;
@@ -133,7 +136,7 @@
 }
 
 - (instancetype)initWithJSONObject:(id)object contentType:(NSString*)type {
-  NSData* data = [NSJSONSerialization dataWithJSONObject:object options:0 error:NULL];
+  NSData* data = [NSJSONSerialization dataWithJSONObject:object options:(NSJSONWritingOptions)0 error:NULL];
   if (data == nil) {
     return nil;
   }

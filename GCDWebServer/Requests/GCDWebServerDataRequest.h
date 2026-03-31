@@ -25,7 +25,7 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "GCDWebServerRequest.h"
+#import <GCDWebServers/GCDWebServerRequest.h>
 
 /**
  *  The GCDWebServerDataRequest subclass of GCDWebServerRequest stores the body

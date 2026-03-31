@@ -41,6 +41,8 @@
 #import <net/if.h>
 #import <netdb.h>
 
+@import UniformTypeIdentifiers;
+
 #import "GCDWebServerPrivate.h"
 
 static NSDateFormatter* _dateFormatterRFC822 = nil;
@@ -171,10 +173,9 @@ NSString* GCDWebServerGetMimeTypeForExtension(NSString* extension) {
   if (extension.length) {
     mimeType = [_overrides objectForKey:extension];
     if (mimeType == nil) {
-      CFStringRef uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)extension, NULL);
+      UTType *uti = [UTType typeWithFilenameExtension:extension];
       if (uti) {
-        mimeType = CFBridgingRelease(UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType));
-        CFRelease(uti);
+        mimeType = uti.preferredMIMEType;
       }
     }
   }

@@ -196,7 +196,7 @@ static NSData* _dashNewlineData = nil;
   BOOL success = YES;
   
   if (_state == kParserState_Headers) {
-    NSRange range = [_data rangeOfData:_newlinesData options:0 range:NSMakeRange(0, _data.length)];
+    NSRange range = [_data rangeOfData:_newlinesData options:(NSDataSearchOptions)0 range:NSMakeRange(0, _data.length)];
     if (range.location != NSNotFound) {
       
       _controlName = nil;
@@ -263,7 +263,7 @@ static NSData* _dashNewlineData = nil;
   }
   
   if ((_state == kParserState_Start) || (_state == kParserState_Content)) {
-    NSRange range = [_data rangeOfData:_boundary options:0 range:NSMakeRange(0, _data.length)];
+    NSRange range = [_data rangeOfData:_boundary options:(NSDataSearchOptions)0 range:NSMakeRange(0, _data.length)];
     if (range.location != NSNotFound) {
       NSRange subRange = NSMakeRange(range.location + range.length, _data.length - range.location - range.length);
       NSRange subRange1 = [_data rangeOfData:_newlineData options:NSDataSearchAnchored range:subRange];
