@@ -452,7 +452,7 @@ static inline NSString* _EncodeBase64(NSString* string) {
     return [data base64Encoding];
   }
 #endif
-  return [[NSString alloc] initWithData:[data base64EncodedDataWithOptions:0] encoding:NSASCIIStringEncoding];
+  return [[NSString alloc] initWithData:[data base64EncodedDataWithOptions:(NSDataBase64EncodingOptions)0] encoding:NSASCIIStringEncoding];
 }
 
 - (int)_createListeningSocket:(BOOL)useIPv6
@@ -465,7 +465,7 @@ static inline NSString* _EncodeBase64(NSString* string) {
     int yes = 1;
     setsockopt(listeningSocket, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes));
     
-    if (bind(listeningSocket, address, length) == 0) {
+    if (bind(listeningSocket, (const struct sockaddr *)address, length) == 0) {
       if (listen(listeningSocket, (int)maxPendingConnections) == 0) {
         GWS_LOG_DEBUG(@"Did open %s listening socket %i", useIPv6 ? "IPv6" : "IPv4", listeningSocket);
         return listeningSocket;
@@ -761,7 +761,7 @@ static inline NSString* _EncodeBase64(NSString* string) {
   if (_options == nil) {
     _options = options ? [options copy] : @{};
 #if TARGET_OS_IPHONE
-    _suspendInBackground = [_GetOption(_options, GCDWebServerOption_AutomaticallySuspendInBackground, @YES) boolValue];
+    _suspendInBackground = [(NSNumber *)_GetOption(_options, GCDWebServerOption_AutomaticallySuspendInBackground, @YES) boolValue];
     if (((_suspendInBackground == NO) || ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground)) && ![self _start:error])
 #else
     if (![self _start:error])
@@ -951,7 +951,7 @@ static inline NSString* _EncodeBase64(NSString* string) {
         return nil;
       }
 
-      NSArray* matches = [expression matchesInString:urlPath options:0 range:NSMakeRange(0, urlPath.length)];
+      NSArray* matches = [expression matchesInString:urlPath options:(NSMatchingOptions)0 range:NSMakeRange(0, urlPath.length)];
       if (matches.count == 0) {
         return nil;
       }
@@ -1099,7 +1099,7 @@ static inline NSString* _EncodeBase64(NSString* string) {
 #elif defined(__GCDWEBSERVER_LOGGING_FACILITY_COCOALUMBERJACK__)
   GCDWebServerLogLevel = level;
 #elif defined(__GCDWEBSERVER_LOGGING_FACILITY_BUILTIN__)
-  GCDWebServerLogLevel = level;
+  GCDWebServerLogLevel = (GCDWebServerLoggingLevel)level;
 #endif
 }
 
@@ -1147,7 +1147,7 @@ static inline NSString* _EncodeBase64(NSString* string) {
 
 static CFHTTPMessageRef _CreateHTTPMessageFromData(NSData* data, BOOL isRequest) {
   CFHTTPMessageRef message = CFHTTPMessageCreateEmpty(kCFAllocatorDefault, isRequest);
-  if (CFHTTPMessageAppendBytes(message, data.bytes, data.length)) {
+  if (CFHTTPMessageAppendBytes(message, (unsigned char *)data.bytes, data.length)) {
     return message;
   }
   CFRelease(message);
@@ -1164,7 +1164,7 @@ static CFHTTPMessageRef _CreateHTTPMessageFromPerformingRequest(NSData* inData, 
     addr4.sin_family = AF_INET;
     addr4.sin_port = htons(8080);
     addr4.sin_addr.s_addr = htonl(INADDR_ANY);
-    if (connect(httpSocket, (void*)&addr4, sizeof(addr4)) == 0) {
+    if (connect(httpSocket, (const struct sockaddr *)&addr4, sizeof(addr4)) == 0) {
       if (write(httpSocket, inData.bytes, inData.length) == (ssize_t)inData.length) {
         NSMutableData* outData = [[NSMutableData alloc] initWithLength:(256 * 1024)];
         NSUInteger length = 0;

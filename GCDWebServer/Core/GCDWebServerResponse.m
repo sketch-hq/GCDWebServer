@@ -217,7 +217,7 @@
 }
 
 - (void)close {
-  ;
+  // No-op
 }
 
 - (void)prepareForReading {

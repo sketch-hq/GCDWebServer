@@ -312,11 +312,11 @@ NSString* const GCDWebServerRequestAttribute_RegexCaptures = @"GCDWebServerReque
 }
 
 - (NSString*)localAddressString {
-  return GCDWebServerStringFromSockAddr(_localAddress.bytes, YES);
+  return GCDWebServerStringFromSockAddr((const struct sockaddr *)_localAddress.bytes, YES);
 }
 
 - (NSString*)remoteAddressString {
-  return GCDWebServerStringFromSockAddr(_remoteAddress.bytes, YES);
+  return GCDWebServerStringFromSockAddr((const struct sockaddr *)_remoteAddress.bytes, YES);
 }
 
 - (NSString*)description {

@@ -123,12 +123,12 @@ static int32_t _connectionCounter = 0;
   [self _readData:headersData withLength:NSUIntegerMax completionBlock:^(BOOL success) {
     
     if (success) {
-      NSRange range = [headersData rangeOfData:_CRLFCRLFData options:0 range:NSMakeRange(0, headersData.length)];
+      NSRange range = [headersData rangeOfData:_CRLFCRLFData options:(NSDataSearchOptions)0 range:NSMakeRange(0, headersData.length)];
       if (range.location == NSNotFound) {
         [self _readHeaders:headersData withCompletionBlock:block];
       } else {
         NSUInteger length = range.location + range.length;
-        if (CFHTTPMessageAppendBytes(self->_requestMessage, headersData.bytes, length)) {
+        if (CFHTTPMessageAppendBytes(self->_requestMessage, (const unsigned char *)headersData.bytes, length)) {
           if (CFHTTPMessageIsHeaderComplete(self->_requestMessage)) {
             block([headersData subdataWithRange:NSMakeRange(length, headersData.length - length)]);
           } else {
@@ -191,11 +191,11 @@ static inline NSUInteger _ScanHexNumber(const void* bytes, NSUInteger size) {
   GWS_DCHECK([_request hasBody] && [_request usesChunkedTransferEncoding]);
   
   while (1) {
-    NSRange range = [chunkData rangeOfData:_CRLFData options:0 range:NSMakeRange(0, chunkData.length)];
+    NSRange range = [chunkData rangeOfData:_CRLFData options:(NSDataSearchOptions)0 range:NSMakeRange(0, chunkData.length)];
     if (range.location == NSNotFound) {
       break;
     }
-    NSRange extensionRange = [chunkData rangeOfData:[NSData dataWithBytes:";" length:1] options:0 range:NSMakeRange(0, range.location)];  // Ignore chunk extensions
+    NSRange extensionRange = [chunkData rangeOfData:[NSData dataWithBytes:";" length:1] options:(NSDataSearchOptions)0 range:NSMakeRange(0, range.location)];  // Ignore chunk extensions
     NSUInteger length = _ScanHexNumber((char*)chunkData.bytes, extensionRange.location != NSNotFound ? extensionRange.location : range.location);
     if (length != NSNotFound) {
       if (length) {
@@ -218,7 +218,7 @@ static inline NSUInteger _ScanHexNumber(const void* bytes, NSUInteger size) {
           return;
         }
       } else {
-        NSRange trailerRange = [chunkData rangeOfData:_CRLFCRLFData options:0 range:NSMakeRange(range.location, chunkData.length - range.location)];  // Ignore trailers
+        NSRange trailerRange = [chunkData rangeOfData:_CRLFCRLFData options:(NSDataSearchOptions)0 range:NSMakeRange(range.location, chunkData.length - range.location)];  // Ignore trailers
         if (trailerRange.location != NSNotFound) {
           block(YES);
           return;
@@ -362,7 +362,7 @@ static inline NSUInteger _ScanHexNumber(const void* bytes, NSUInteger size) {
 }
 
 - (BOOL)isUsingIPv6 {
-  const struct sockaddr* localSockAddr = _localAddress.bytes;
+  const struct sockaddr* localSockAddr = (const struct sockaddr *)_localAddress.bytes;
   return (localSockAddr->sa_family == AF_INET6);
 }
 
@@ -623,11 +623,11 @@ static inline NSUInteger _ScanHexNumber(const void* bytes, NSUInteger size) {
 }
 
 - (NSString*)localAddressString {
-  return GCDWebServerStringFromSockAddr(_localAddress.bytes, YES);
+  return GCDWebServerStringFromSockAddr((const struct sockaddr *)_localAddress.bytes, YES);
 }
 
 - (NSString*)remoteAddressString {
-  return GCDWebServerStringFromSockAddr(_remoteAddress.bytes, YES);
+  return GCDWebServerStringFromSockAddr((const struct sockaddr *)_remoteAddress.bytes, YES);
 }
 
 - (void)dealloc {
@@ -804,7 +804,7 @@ static inline BOOL _CompareResources(NSString* responseETag, NSString* requestET
   if (request) {
     [self _initializeResponseHeadersWithStatusCode:statusCode];
     [self _writeHeadersWithCompletionBlock:^(BOOL success) {
-      ;  // Nothing more to do
+      // Nothing more to do
     }];
   }
   GWS_LOG_DEBUG(@"Connection aborted with status code %i on socket %i", (int)statusCode, _socket);
